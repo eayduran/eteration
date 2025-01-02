@@ -62,9 +62,9 @@ const ProductList: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Filters Sidebar */}
-        <div className="col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4">
           {/* Sort By */}
           <p className="text-gray-600 text-xs">Sort By</p>
           <div className="bg-white p-4 shadow-detailCard">
@@ -206,8 +206,8 @@ const ProductList: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="col-span-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="lg:col-span-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {currentProducts.map(product => (
               <div key={product.id} className="bg-white shadow-detailCard overflow-hidden">
                 <img
@@ -218,7 +218,7 @@ const ProductList: React.FC = () => {
                 />
                 <div className="p-3">
                   <p className="text-blue-600 font-medium mb-2">{product.price.toLocaleString('tr-TR')} ₺</p>
-                  <h3 className="text-lg font-medium mb-4 cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>
+                  <h3 className="text-lg font-medium mb-4 cursor-pointer truncate" onClick={() => navigate(`/product/${product.id}`)}>
                     {product.name}
                   </h3>
                   <button
@@ -234,7 +234,7 @@ const ProductList: React.FC = () => {
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex justify-center items-center mt-8 gap-1">
+            <div className="flex justify-center items-center mt-8 gap-1 flex-wrap">
               <button
                 onClick={() => dispatch(setCurrentPage(currentPage - 1))}
                 disabled={currentPage === 1}
@@ -265,7 +265,7 @@ const ProductList: React.FC = () => {
         </div>
 
         {/* Cart Summary */}
-        <div className="col-span-2">
+        <div className="lg:col-span-2 order-first lg:order-last">
           <CartSummary />
         </div>
       </div>

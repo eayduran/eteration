@@ -33,10 +33,10 @@ const ProductDetail: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Product Details */}
-        <div className="col-span-10">
-          <div className="grid grid-cols-2 gap-8 bg-white p-4 shadow-detailCard">
+        <div className="lg:col-span-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-4 shadow-detailCard">
             {/* Product Image */}
             <div className="aspect-square">
               <img
@@ -48,8 +48,8 @@ const ProductDetail: React.FC = () => {
 
             {/* Product Info */}
             <div className="flex flex-col">
-              <h2 className="text-3xl mb-2">{product.name}</h2>
-              <h3 className="text-2xl font-semibold mb-8 text-blue-600">{product.price.toLocaleString('tr-TR')}₺</h3>
+              <h2 className="text-2xl md:text-3xl mb-2">{product.name}</h2>
+              <h3 className="text-xl md:text-2xl font-semibold mb-8 text-blue-600">{product.price.toLocaleString('tr-TR')}₺</h3>
               
               <button
                 onClick={() => dispatch(addToCart(product))}
@@ -64,7 +64,7 @@ const ProductDetail: React.FC = () => {
         </div>
 
         {/* Cart Summary */}
-        <div className="col-span-2">
+        <div className="lg:col-span-2 order-first lg:order-last">
           <CartSummary />
         </div>
       </div>
