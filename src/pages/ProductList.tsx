@@ -238,7 +238,7 @@ const ProductList: React.FC = () => {
               <button
                 onClick={() => dispatch(setCurrentPage(currentPage - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1 border rounded text-sm disabled:opacity-50"
+                className="px-3 py-1 border-none text-sm disabled:opacity-50"
               >
                 &lt;
               </button>
@@ -246,8 +246,8 @@ const ProductList: React.FC = () => {
                 <button
                   key={page}
                   onClick={() => dispatch(setCurrentPage(page))}
-                  className={`px-3 py-1 border rounded text-sm ${
-                    currentPage === page ? 'bg-[#2A59FE] text-white' : ''
+                  className={`px-3 py-1 rounded-lg text-sm ${
+                    currentPage === page ? 'bg-white text-[#2A59FE] shadow-sm' : ''
                   }`}
                 >
                   {page}
@@ -256,7 +256,7 @@ const ProductList: React.FC = () => {
               <button
                 onClick={() => dispatch(setCurrentPage(currentPage + 1))}
                 disabled={currentPage === totalPages}
-                className="px-3 py-1 border rounded text-sm disabled:opacity-50"
+                className="px-3 py-1 border-none text-sm disabled:opacity-50"
               >
                 &gt;
               </button>
