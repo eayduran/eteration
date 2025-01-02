@@ -31,8 +31,13 @@ const ProductList: React.FC = () => {
   }, [dispatch, status]);
 
   const filteredProducts = items.filter(product => {
-    const matchesSearch = searchQuery ? product.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
-    const matchesModel = !filters.model || product.model === filters.model;
+    const searchTerm = searchQuery.toLowerCase();
+    const matchesSearch = !searchQuery || 
+      product.name.toLowerCase().includes(searchTerm) ||
+      product.brand.toLowerCase().includes(searchTerm) ||
+      product.model.toLowerCase().includes(searchTerm) ||
+      product.description.toLowerCase().includes(searchTerm);
+    const matchesModel = !filters.category || product.category === filters.category;
     const matchesBrand = !filters.brand || product.brand === filters.brand;
     const matchesPrice = product.price >= filters.priceRange.min && product.price <= filters.priceRange.max;
     return matchesSearch && matchesModel && matchesBrand && matchesPrice;
@@ -61,8 +66,8 @@ const ProductList: React.FC = () => {
         {/* Filters Sidebar */}
         <div className="col-span-2 space-y-4">
           {/* Sort By */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-gray-600 mb-3">Sort By</h3>
+          <p className="text-gray-600 text-xs">Sort By</p>
+          <div className="bg-white p-4 shadow-detailCard">
             <div className="space-y-2">
               <label className="flex items-center cursor-pointer">
                 <input
@@ -120,15 +125,15 @@ const ProductList: React.FC = () => {
           </div>
 
           {/* Brands */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-gray-600 mb-3">Brands</h3>
+          <p className="text-gray-600 text-xs">Brands</p>
+          <div className="bg-white p-4 shadow-detailCard">
             <div className="relative mb-3">
               <input
                 type="text"
                 placeholder="Search"
                 value={brandSearchQuery}
                 onChange={(e) => dispatch(setBrandSearchQuery(e.target.value))}
-                className="w-full pl-8 pr-3 py-2 border rounded-lg text-sm"
+                className="w-full pl-8 pr-3 py-2 border  text-sm"
               />
               <svg
                 className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400"
@@ -160,15 +165,15 @@ const ProductList: React.FC = () => {
           </div>
 
           {/* Model */}
-          <div className="bg-white p-4 rounded-lg shadow">
-            <h3 className="text-gray-600 mb-3">Model</h3>
+          <p className="text-gray-600 text-xs">Model</p>
+          <div className="bg-white p-4 shadow-detailCard">
             <div className="relative mb-3">
               <input
                 type="text"
                 placeholder="Search"
                 value={modelSearchQuery}
                 onChange={(e) => dispatch(setModelSearchQuery(e.target.value))}
-                className="w-full pl-8 pr-3 py-2 border rounded-lg text-sm"
+                className="w-full pl-8 pr-3 py-2 border  text-sm"
               />
               <svg
                 className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400"
@@ -204,7 +209,7 @@ const ProductList: React.FC = () => {
         <div className="col-span-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {currentProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-lg shadow overflow-hidden">
+              <div key={product.id} className="bg-white shadow-detailCard overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -218,7 +223,7 @@ const ProductList: React.FC = () => {
                   <p className="text-blue-600 font-bold mb-4">{product.price.toLocaleString('tr-TR')} ₺</p>
                   <button
                     onClick={() => dispatch(addToCart(product))}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+                    className="w-full bg-[#2A59FE] text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
                   >
                     Add to Cart
                   </button>
@@ -242,7 +247,7 @@ const ProductList: React.FC = () => {
                   key={page}
                   onClick={() => dispatch(setCurrentPage(page))}
                   className={`px-3 py-1 border rounded text-sm ${
-                    currentPage === page ? 'bg-blue-600 text-white' : ''
+                    currentPage === page ? 'bg-[#2A59FE] text-white' : ''
                   }`}
                 >
                   {page}
@@ -255,17 +260,6 @@ const ProductList: React.FC = () => {
               >
                 &gt;
               </button>
-              {totalPages > 3 && (
-                <>
-                  <span className="px-2">...</span>
-                  <button
-                    onClick={() => dispatch(setCurrentPage(totalPages))}
-                    className="px-3 py-1 border rounded text-sm"
-                  >
-                    {totalPages}
-                  </button>
-                </>
-              )}
             </div>
           )}
         </div>

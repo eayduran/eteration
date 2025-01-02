@@ -11,8 +11,8 @@ const CartSummary: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Cart Items */}
-      <div className="bg-white rounded-lg shadow p-4">
-        <h2 className="text-lg font-semibold mb-4">Cart</h2>
+      <p className="text-gray-600 text-xs">Cart</p>
+      <div className="bg-white shadow-detailCard p-4">
         <div className="space-y-4">
           {items.map(item => (
             <div key={item.id} className="flex items-center justify-between">
@@ -43,8 +43,9 @@ const CartSummary: React.FC = () => {
       </div>
 
       {/* Checkout */}
-      <div className="bg-white rounded-lg shadow p-4">
-        <div className="flex justify-between items-center mb-4">
+      <p className="text-gray-600 text-xs">Checkout</p>
+      <div className="bg-white shadow-detailCard p-4">
+        <div className="flex justify-start gap-2 items-center mb-4">
           <span className="font-medium">Total Price:</span>
           <span className="text-blue-600 font-bold">{total.toLocaleString('tr-TR')}₺</span>
         </div>
