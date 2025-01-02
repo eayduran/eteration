@@ -207,20 +207,20 @@ const ProductList: React.FC = () => {
 
         {/* Product Grid */}
         <div className="col-span-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {currentProducts.map(product => (
               <div key={product.id} className="bg-white shadow-detailCard overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-48 object-cover cursor-pointer"
+                  className="w-full h-48 object-cover cursor-pointer p-3"
                   onClick={() => navigate(`/product/${product.id}`)}
                 />
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-2 cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>
+                <div className="p-3">
+                  <p className="text-blue-600 font-medium mb-2">{product.price.toLocaleString('tr-TR')} ₺</p>
+                  <h3 className="text-lg font-medium mb-4 cursor-pointer" onClick={() => navigate(`/product/${product.id}`)}>
                     {product.name}
                   </h3>
-                  <p className="text-blue-600 font-bold mb-4">{product.price.toLocaleString('tr-TR')} ₺</p>
                   <button
                     onClick={() => dispatch(addToCart(product))}
                     className="w-full bg-[#2A59FE] text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
